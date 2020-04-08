@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+
+class KasaliAraclar{
+public:
+    virtual void print_metrekaresini()=0;
+
+};
+
+class tasit{
+private :
+    string marka;
+    int yil;
+public :
+    void set_yil(int yil){this->yil=yil;}
+    void set_marka(string marka){this->marka=marka;}
+    virtual int get_yil(){return yil;}
+    virtual string get_marka(){return this->marka;}
+    virtual void aracCalistir()=0;
+};
+
+class BinekOto:public tasit{
+private:
+    string marka;
+    int yil;
+public:
+
+    void aracCalistir()override {
+    cout<<"BinekOto calistirdi\n marka" << marka <<"\nyil = "<<this->yil<<endl;
+    }
+};
+
+class Karavan:public tasit{
+private:
+    string marka;
+    int yil;
+public:
+
+    void aracCalistir()override {
+    cout<<"Karavan calistirdi\nmarka "<< marka <<"\nyil = "<<yil<<endl;
+    }
+};
+
+class Motosiklet:public tasit,KasaliAraclar{
+private:
+    string marka;
+    int yil;
+    double kasa;
+public:
+
+    void aracCalistir()override {
+    cout<<"Motosiklet calistirdi\n marka"<<this->marka <<"\nyil = "<<this->yil<<endl;
+    }
+    void print_metrekaresini() override {cout<<"\n matre kares ="<<this->kasa<<endl;}
+};
+
+int main(){
+
+/*------------------------------*/
+BinekOto* bo=new BinekOto();
+bo->set_yil(100);
+bo->set_marka("marcides");
+int  a=bo->get_yil();
+string b=bo->get_marka();
+cout<< a <<endl << b<<endl;
+bo->aracCalistir();
+
+/*------------------------------*/
+Karavan* kn=new Karavan();
+kn->set_yil(44);
+kn->set_marka("dep");
+
+a =kn->get_yil();
+ b=kn->get_marka();
+cout<< a <<endl << b<<endl;
+kn->aracCalistir();
+/*------------------------------*/
+Motosiklet* mt=new Motosiklet();
+mt->set_yil(33);
+mt->set_marka("bmw");
+ a=mt->get_yil();
+ b=mt->get_marka();
+cout<< a <<endl << b<<endl;
+mt->aracCalistir();
+
+return 0;
+
+}
+
+
